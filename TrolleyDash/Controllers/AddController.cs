@@ -7,6 +7,10 @@ namespace TrolleyDash.Controllers
     {
         public IActionResult Index()
         {
+            RedirectToAction("Add");
+        }
+        public IActionResult Add()
+        {
             return View();
         }
     }
