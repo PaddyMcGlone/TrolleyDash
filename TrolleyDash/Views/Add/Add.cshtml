@@ -1,0 +1,32 @@
+@model AddViewModel
+
+@{
+    ViewData["Title"] = "Manage your Groceries";
+}
+
+<div class="panel panel-default add-panel">
+    <div class="panel-heading">@ViewData["Title"]</div>
+
+    <table class="table table-hover">
+        <thead>
+            <td>&#x2714;</td>
+            <td>Grocery</td>
+            <td>Due</td>
+        </thead>
+
+        @foreach (var item in Model.Groceries)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" class="done-checkbox">                    
+                </td>
+                <td>@item.GroceryItem</td>
+                <td>@item.DueFor</td>
+            </tr>
+        }
+    </table>
+
+    <div class="panel-footer add-item-form">
+        <!-- ToDo: Add grocery form -->
+    </div>
+</div>
