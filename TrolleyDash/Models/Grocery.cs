@@ -6,6 +6,11 @@ namespace TrolleyDash.Models
     public class Grocery
     {
         #region Constructor
+
+        private Grocery()
+        {
+        }
+
         public Grocery(string name, int quantity, DateTime? dueFor = null)
         {
             this.Name = name;
