@@ -33,7 +33,7 @@ namespace TrolleyDash
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddSingleton<IGroceryService, FakeGroceryService>();
+            services.AddSingleton<IGroceryService, GroceryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
