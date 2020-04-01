@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using TrolleryDash.Services;
 using TrolleyDash.Models;
 
 namespace TrolleyDash.Services
@@ -11,24 +10,9 @@ namespace TrolleyDash.Services
         {
             return new List<Grocery>
             {
-                new Grocery
-                {
-                    Name     = "Bread",
-                    Quantity = 2,
-                    DueFor   = DateTime.Today
-                },
-                new Grocery
-                {
-                    Name     = "Milk",
-                    Quantity = 1,
-                    DueFor   = DateTime.Today
-                },
-                new Grocery
-                {
-                    Name     = "Chopped Tomatoes",
-                    Quantity = 4,
-                    DueFor   = DateTime.Today.AddDays(4)
-                }
+                new Grocery("Bread", 2, DateTime.Today),
+                new Grocery("Milk", 1, DateTime.Today),
+                new Grocery("Chopped Tomatoes", 4, DateTime.Today.AddDays(4))
             };
         }
     }

@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+
 namespace TrolleyDash.Models
 {
     public class AddViewModel
     {
-        public Grocery[] Groceries { get; set; }
+        public IEnumerable<Grocery> Groceries { get; set; }
     }
 }

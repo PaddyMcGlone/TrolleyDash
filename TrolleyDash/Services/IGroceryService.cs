@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using TrolleyDash.Models;
 
-namespace TrolleryDash.Services
+namespace TrolleyDash.Services
 {
     public interface IGroceryService
     {
