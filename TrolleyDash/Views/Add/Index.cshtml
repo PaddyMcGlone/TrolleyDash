@@ -19,10 +19,13 @@
         {
             <tr>
                 <td>
-                    <input type="checkbox" class="done-checkbox">                    
+                    <form asp-action="MarkDone" method="POST">
+                        <input type="checkbox" class="done-checkbox">
+                        <input type="hidden" name="id" value="@item.Id">
+                    </form>
                 </td>
                 <td>@item.GroceryItem</td>
-                <td>@item.DueFor.Humanize()</td>
+                <td>@item.DueFor.Humanize()</td>                
             </tr>
         }
     </table>
