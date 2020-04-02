@@ -9,7 +9,7 @@ namespace TrolleyDash.Services
     {
 
         #region Properties
-        private readonly ApplicationDbContext _context { get; set; }
+        private ApplicationDbContext _context { get; set; }
         #endregion
 
         #region Constructor
