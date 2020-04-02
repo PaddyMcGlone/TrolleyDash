@@ -37,6 +37,18 @@ namespace TrolleyDash.Services
             _context.Groceries.Add(grocery);
             _context.SaveChanges();
         }
+
+        public void MarkDone(Guid id)
+        {
+            if (id == Guid.Empty)
+                throw new ArgumentNullException("Id");
+
+            var grocery = _context.Groceries.Find(id);
+            grocery.Fetched = true;
+
+            _context.SaveChanges();
+        }
+
         #endregion
     }
 }

@@ -37,6 +37,18 @@ namespace TrolleyDash.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [ValidateAntiForgeryToken]
+        public IActionResult MarkDone(Guid id)
+        {
+            if (id == Guid.Empty)
+                return RedirectToAction("Index");
+
+            groceryService.MarkDone(id);
+
+            RedirectToAction("Index");
+        }
+
         #endregion
     }
 }
