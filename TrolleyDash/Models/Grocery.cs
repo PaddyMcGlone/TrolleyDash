@@ -7,7 +7,7 @@ namespace TrolleyDash.Models
     {
         #region Constructor
 
-        private Grocery()
+        public Grocery()
         {
         }
 

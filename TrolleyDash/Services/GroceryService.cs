@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TrolleyDash.Data;
@@ -23,6 +24,18 @@ namespace TrolleyDash.Services
         public IEnumerable<Grocery> GetAllGroceriesToBeFetched()
         {
             return _context.Groceries.Where(g => !g.Fetched).ToList();
+        }
+
+        public void Add(Grocery grocery)
+        {
+            if (grocery == null)
+                throw new ArgumentNullException("grocery");
+
+            grocery.Id = Guid.NewGuid();
+            grocery.DueFor = DateTime.Now.AddDays(3);
+
+            _context.Groceries.Add(grocery);
+            _context.SaveChanges();
         }
         #endregion
     }

@@ -6,6 +6,11 @@ namespace TrolleyDash.Services
 {
     public class FakeGroceryService : IGroceryService
     {
+        public void Add(Grocery grocery)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Grocery> GetAllGroceriesToBeFetched()
         {
             return new List<Grocery>

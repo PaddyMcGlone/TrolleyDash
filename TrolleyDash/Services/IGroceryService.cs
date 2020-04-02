@@ -7,5 +7,7 @@ namespace TrolleyDash.Services
     public interface IGroceryService
     {
         IEnumerable<Grocery> GetAllGroceriesToBeFetched();
+
+        void Add(Grocery grocery);
     }
 }

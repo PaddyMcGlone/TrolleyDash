@@ -26,6 +26,17 @@ namespace TrolleyDash.Controllers
 
             return View(viewModel);
         }
+
+        [ValidateAntiForgeryToken]
+        public IActionResult AddGrocery(Grocery grocery)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction("Index");
+
+            groceryService.Add(grocery);
+
+            return RedirectToAction("Index");
+        }
         #endregion
     }
 }
