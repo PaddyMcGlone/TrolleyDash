@@ -9,5 +9,7 @@ namespace TrolleyDash.Services
         IEnumerable<Grocery> GetAllGroceriesToBeFetched();
 
         void Add(Grocery grocery);
+
+        void MarkDone(Guid id);
     }
 }

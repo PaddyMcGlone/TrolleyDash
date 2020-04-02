@@ -43,7 +43,7 @@ namespace TrolleyDash.Services
             if (id == Guid.Empty)
                 throw new ArgumentNullException("Id");
 
-            var grocery = _context.Groceries.Find(id);
+            var grocery = _context.Groceries.FirstOrDefault(g => g.Id == id);
             grocery.Fetched = true;
 
             _context.SaveChanges();

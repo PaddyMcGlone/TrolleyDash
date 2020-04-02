@@ -20,5 +20,10 @@ namespace TrolleyDash.Services
                 new Grocery("Chopped Tomatoes", 4, DateTime.Today.AddDays(4))
             };
         }
+
+        public void MarkDone(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

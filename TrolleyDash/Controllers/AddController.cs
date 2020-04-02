@@ -46,7 +46,7 @@ namespace TrolleyDash.Controllers
 
             groceryService.MarkDone(id);
 
-            RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         #endregion
