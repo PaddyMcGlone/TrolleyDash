@@ -8,24 +8,26 @@
 <div class="panel panel-default add-panel">
     <div class="panel-heading">@ViewData["Title"]</div>
 
-    <table class="table table-hover">
-        <thead>
-            <td>&#x2714;</td>
-            <td>Grocery</td>
-            <td>Due</td>
-        </thead>
+    <table class="table table-hover table-striped">
+        <thead>            
+            <th>Grocery</th>
+            <th>Quantity</th>
+            <th>Due</th>
+            <th>&#x2714;</th>
+        </thead>        
 
         @foreach (var item in Model.Groceries)
         {
-            <tr>
+            <tr>                
+                <td>@item.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.DueFor.Humanize()</td>                
                 <td>
                     <form asp-action="MarkDone" method="POST">
                         <input type="checkbox" class="done-checkbox">
                         <input type="hidden" name="id" value="@item.Id">
                     </form>
                 </td>
-                <td>@item.GroceryItem</td>
-                <td>@item.DueFor.Humanize()</td>                
             </tr>
         }
     </table>
