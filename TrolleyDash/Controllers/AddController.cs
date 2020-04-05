@@ -1,10 +1,12 @@
 using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrolleyDash.Models;
 using TrolleyDash.Services;
 
 namespace TrolleyDash.Controllers
 {
+    [Authorize]
     public class AddController : Controller
     {
         #region Fields
