@@ -1,5 +1,7 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TrolleyDash.Models;
 using TrolleyDash.Services;
@@ -10,22 +12,33 @@ namespace TrolleyDash.Controllers
     public class AddController : Controller
     {
         #region Fields
-        private readonly IGroceryService groceryService;
+        private readonly IGroceryService GroceryService;
+        public UserManager<IdentityUser> UserManager { get; }
         #endregion
 
         #region Constructor
-        public AddController(IGroceryService groceryService)
+        public AddController(IGroceryService groceryService,
+                             UserManager<IdentityUser> userManager)
         {
-            this.groceryService = groceryService;
+            GroceryService = groceryService;
+            UserManager = userManager;
         }
         #endregion
 
         #region Actions
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var groceries = groceryService.GetAllGroceriesToBeFetched();
-            var viewModel = new AddViewModel { Groceries = groceries };
+            // User = lightweight object containing user info
+            var currentUser = await UserManager.GetUserAsync(User);
 
+            // Should never be null due to authorize attribute
+            if (currentUser == null)
+                return Challenge();
+
+            // Retrieve Groceries Async
+            var groceries = await GroceryService.GetAllGroceriesToBeFetchedAsync(currentUser);
+
+            var viewModel = new AddViewModel { Groceries = groceries };
             return View(viewModel);
         }
 
@@ -35,7 +48,7 @@ namespace TrolleyDash.Controllers
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
 
-            groceryService.Add(grocery);
+            GroceryService.Add(grocery);
 
             return RedirectToAction("Index");
         }
@@ -46,7 +59,7 @@ namespace TrolleyDash.Controllers
             if (id == Guid.Empty)
                 return RedirectToAction("Index");
 
-            groceryService.MarkDone(id);
+            GroceryService.MarkDone(id);
 
             return RedirectToAction("Index");
         }
