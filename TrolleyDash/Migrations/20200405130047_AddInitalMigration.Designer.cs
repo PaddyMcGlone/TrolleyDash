@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrolleyDash.Data;
 
-namespace TrolleyDash.Data.Migrations
+namespace TrolleyDash.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200405113738_InitalMigration")]
-    partial class InitalMigration
+    [Migration("20200405130047_AddInitalMigration")]
+    partial class AddInitalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,6 +231,9 @@ namespace TrolleyDash.Data.Migrations
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
