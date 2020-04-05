@@ -2,7 +2,7 @@
 
 namespace TrolleyDash.Data.Migrations
 {
-    public partial class AddInitialMigration : Migration
+    public partial class InitalMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

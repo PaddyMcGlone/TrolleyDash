@@ -9,8 +9,8 @@ using TrolleyDash.Data;
 namespace TrolleyDash.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200401184132_AddGroceries")]
-    partial class AddGroceries
+    [Migration("20200405113738_InitalMigration")]
+    partial class InitalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -229,7 +229,7 @@ namespace TrolleyDash.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int?>("Quantity")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

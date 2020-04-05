@@ -227,7 +227,7 @@ namespace TrolleyDash.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int?>("Quantity")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
