@@ -32,13 +32,17 @@ namespace TrolleyDash.Services
                             .ToListAsync();
         }
 
-        public async Task<bool> Add(Grocery grocery)
+        public async Task<bool> Add(Grocery grocery, IdentityUser user)
         {
             if (grocery == null)
                 throw new ArgumentNullException("grocery");
 
+            if (user == null)
+                throw new ArgumentNullException("user");
+
             grocery.Id = Guid.NewGuid();
             grocery.DueFor = DateTime.Now.AddDays(3);
+            grocery.UserId = user.Id;
 
             _context.Groceries.Add(grocery);
             var save = await _context.SaveChangesAsync();
@@ -46,15 +50,19 @@ namespace TrolleyDash.Services
             return save == 1;
         }
 
-        public async Task<bool> MarkDone(Guid id)
+        public async Task<bool> MarkDone(Guid id, IdentityUser user)
         {
             if (id == Guid.Empty)
                 throw new ArgumentNullException("Id");
+
+            if (user == null)
+                throw new ArgumentNullException("user");
 
             var grocery = await _context.Groceries
                                     .FirstOrDefaultAsync(g => g.Id == id);
 
             grocery.Fetched = true;
+            grocery.UserId = user.Id;
 
             var save = await _context.SaveChangesAsync();
             return save == 1;

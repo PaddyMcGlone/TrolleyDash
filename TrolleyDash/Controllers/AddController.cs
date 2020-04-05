@@ -14,6 +14,7 @@ namespace TrolleyDash.Controllers
         #region Fields
         private readonly IGroceryService GroceryService;
         public UserManager<IdentityUser> UserManager { get; }
+
         #endregion
 
         #region Constructor
@@ -38,28 +39,39 @@ namespace TrolleyDash.Controllers
             // Retrieve Groceries Async
             var groceries = await GroceryService.GetAllGroceriesToBeFetchedAsync(currentUser);
 
+            if (groceries == null)
+                return BadRequest("Could not retrieve Groceries");
+
             var viewModel = new AddViewModel { Groceries = groceries };
             return View(viewModel);
         }
 
         [ValidateAntiForgeryToken]
-        public IActionResult AddGrocery(Grocery grocery)
+        public async Task<IActionResult> AddGrocery(Grocery grocery)
         {
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
 
-            GroceryService.Add(grocery);
+            var currentUser = await UserManager.GetUserAsync(User);
+            var AddGrocery = await GroceryService.Add(grocery, currentUser);
+
+            if (!AddGrocery)
+                return BadRequest("Could not add Grocery");
 
             return RedirectToAction("Index");
         }
 
         [ValidateAntiForgeryToken]
-        public IActionResult MarkDone(Guid id)
+        public async Task<IActionResult> MarkDone(Guid id)
         {
             if (id == Guid.Empty)
                 return RedirectToAction("Index");
 
-            GroceryService.MarkDone(id);
+            var currentUser = await UserManager.GetUserAsync(User);
+            var MarkedGrocery = await GroceryService.MarkDone(id, currentUser);
+
+            if (!MarkedGrocery)
+                return BadRequest("Could not mark grocery as done.");
 
             return RedirectToAction("Index");
         }

@@ -10,8 +10,8 @@ namespace TrolleyDash.Services
     {
         Task<List<Grocery>> GetAllGroceriesToBeFetchedAsync(IdentityUser currentUser);
 
-        Task<bool> Add(Grocery grocery);
+        Task<bool> Add(Grocery grocery, IdentityUser user);
 
-        Task<bool> MarkDone(Guid id);
+        Task<bool> MarkDone(Guid id, IdentityUser user);
     }
 }
