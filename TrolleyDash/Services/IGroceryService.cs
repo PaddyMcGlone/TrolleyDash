@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using TrolleyDash.Models;
 
 namespace TrolleyDash.Services
 {
     public interface IGroceryService
     {
-        IEnumerable<Grocery> GetAllGroceriesToBeFetched();
+        Task<List<Grocery>> GetAllGroceriesToBeFetchedAsync(IdentityUser currentUser);
 
-        void Add(Grocery grocery);
+        Task<bool> Add(Grocery grocery);
 
-        void MarkDone(Guid id);
+        Task<bool> MarkDone(Guid id);
     }
 }

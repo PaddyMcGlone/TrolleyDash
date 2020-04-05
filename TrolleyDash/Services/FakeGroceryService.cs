@@ -1,17 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using TrolleyDash.Models;
 
 namespace TrolleyDash.Services
 {
     public class FakeGroceryService : IGroceryService
     {
-        public void Add(Grocery grocery)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Grocery> GetAllGroceriesToBeFetched()
+        public async Task<List<Grocery>> GetAllGroceriesToBeFetchedAsync(IdentityUser currentUser)
         {
             return new List<Grocery>
             {
@@ -21,7 +18,12 @@ namespace TrolleyDash.Services
             };
         }
 
-        public void MarkDone(Guid id)
+        public async Task<bool> Add(Grocery grocery)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> MarkDone(Guid id)
         {
             throw new NotImplementedException();
         }

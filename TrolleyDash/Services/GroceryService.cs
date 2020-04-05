@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using TrolleyDash.Data;
 using TrolleyDash.Models;
 
@@ -21,12 +24,14 @@ namespace TrolleyDash.Services
         #endregion
 
         #region Methods
-        public IEnumerable<Grocery> GetAllGroceriesToBeFetched()
+        public async Task<List<Grocery>> GetAllGroceriesToBeFetchedAsync(IdentityUser currentUser)
         {
-            return _context.Groceries.Where(g => !g.Fetched).ToList();
+            return await _context.Groceries
+                            .Where(g => !g.Fetched)
+                            .ToListAsync();
         }
 
-        public void Add(Grocery grocery)
+        public async Task<bool> Add(Grocery grocery)
         {
             if (grocery == null)
                 throw new ArgumentNullException("grocery");
@@ -35,18 +40,23 @@ namespace TrolleyDash.Services
             grocery.DueFor = DateTime.Now.AddDays(3);
 
             _context.Groceries.Add(grocery);
-            _context.SaveChanges();
+            var save = await _context.SaveChangesAsync();
+
+            return save == 1;
         }
 
-        public void MarkDone(Guid id)
+        public async Task<bool> MarkDone(Guid id)
         {
             if (id == Guid.Empty)
                 throw new ArgumentNullException("Id");
 
-            var grocery = _context.Groceries.FirstOrDefault(g => g.Id == id);
+            var grocery = await _context.Groceries
+                                    .FirstOrDefaultAsync(g => g.Id == id);
+
             grocery.Fetched = true;
 
-            _context.SaveChanges();
+            var save = await _context.SaveChangesAsync();
+            return save == 1;
         }
 
         #endregion
