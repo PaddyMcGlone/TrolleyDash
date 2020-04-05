@@ -6,9 +6,10 @@ using TrolleyDash.Models;
 
 namespace TrolleyDash.Services
 {
-    public class FakeGroceryService : IGroceryService
+    // Removed GroceryService interface definition as class no longer used.
+    public class FakeGroceryService
     {
-        public async Task<List<Grocery>> GetAllGroceriesToBeFetchedAsync(IdentityUser currentUser)
+        public List<Grocery> GetAllGroceriesToBeFetchedAsync(IdentityUser currentUser)
         {
             return new List<Grocery>
             {
@@ -18,12 +19,12 @@ namespace TrolleyDash.Services
             };
         }
 
-        public async Task<bool> Add(Grocery grocery)
+        public void Add(Grocery grocery)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> MarkDone(Guid id)
+        public void MarkDone(Guid id)
         {
             throw new NotImplementedException();
         }

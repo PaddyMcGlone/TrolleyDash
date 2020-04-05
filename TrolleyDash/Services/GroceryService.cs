@@ -27,7 +27,8 @@ namespace TrolleyDash.Services
         public async Task<List<Grocery>> GetAllGroceriesToBeFetchedAsync(IdentityUser currentUser)
         {
             return await _context.Groceries
-                            .Where(g => !g.Fetched)
+                            .Where(g => !g.Fetched &&
+                            g.UserId == currentUser.Id)
                             .ToListAsync();
         }
 
